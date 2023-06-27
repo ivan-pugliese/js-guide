@@ -46,6 +46,24 @@ modulo
 exponente
 3 ** 3
 
+
+ let a = 2;
+    let b = new Number(1);
+    let c = 7.19;
+    let d = "5.6";
+
+    console.log(a, b);
+    console.log(c.toFixed(1));
+    console.log(c.toFixed(5));
+    console.log(parseInt(c));
+    console.log(parseFloat(c));
+    console.log(typeof c, typeof d);
+    console.log(a + b);
+    console.log(c + parseInt(d));
+    console.log(c + parseFloat(d));
+    console.log(c + Number.parseInt(d));
+    console.log(c + Number.parseFloat(d));
+
 ***/
 
 
@@ -61,6 +79,26 @@ Strings
 
 concatenacion
 "Hola " + "mundo"
+
+        let nombre = "Jon";
+        let apellido = 'MirCha';
+        let saludo = new String("Hola Mundo");
+        let lorem = "       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est, et dolorum. Adipisci sequi, voluptates accusamus earum magnam non pariatur odit consequuntur dicta modi. Quam soluta aliquid nam ea quod dolore.      ";
+
+        console.log(nombre, apellido, saludo);
+        console.log(
+          nombre.length,
+          apellido.length,
+          saludo.length,
+          nombre.toUpperCase(),
+          apellido.toLowerCase(),
+          lorem.includes("amet"),
+          lorem.includes("jon"),
+          lorem,
+          lorem.trim(),
+          lorem.split(" "),
+          lorem.split(",")
+        );
   
 ***/
 
@@ -71,6 +109,18 @@ Booleans
 
 true
 false
+
+ let verdadero = true;
+    let falso = false;
+    let v = Boolean(true);
+    let f = Boolean(false);
+
+    console.log(verdadero, falso, v, f);
+    console.log(typeof verdadero, typeof falso);
+    console.log(Boolean(0)); tiende a falso
+    console.log(Boolean(-7)); tiende a verdadero
+    console.log(Boolean("")); tiende a falso
+    console.log(Boolean(" ")); tiende a verdadero
   
 ***/
 

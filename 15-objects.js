@@ -101,9 +101,9 @@ const spiderman3 = {
   powers: ['web', 'invisibility', 'spider-sense']
 }
 
-const { universe2, name2, powers } = spiderman
-console.log(universe) // 42
-console.log(name) // 'Spidey'
+const { universe2, name2, powers } = spiderman3
+console.log(universe2) // 42
+console.log(name2) // 'Spidey'
 console.log(powers) // ['web', 'invisibility', 'spider-sense']
 
 

@@ -34,6 +34,19 @@ console.log(numbers) // [10, 2, 30, 4, 5]
 
 // ¿Cómo es que pese a que hemos indicado que es una constante const podemos modificar el Array? Aunque hay una explicación mucho más larga, que veremos más adelante, la respuesta corta es que const sólo impide que se reasigne el valor de la variable, no que se modifique el valor en sí.
 
+// Otras formas de crear arrays :
+
+const c = Array.of("X", "Y", "Z", 9, 8, 7);
+console.log(c);
+
+const d = Array(100).fill(false);
+console.log(d);
+
+const e = new Array();
+console.log(e);
+
+const f = new Array(1, 2, 3, true, false);
+console.log(f);
 
 // Los arrays de JavaScript tienen una serie de métodos y propiedades que nos permiten trabajar con ellos de forma sencilla.
 // Un método es una función que se ejecuta sobre un objeto. Una propiedad es una variable que pertenece a un objeto. En este caso, el objeto es un array.
@@ -47,7 +60,6 @@ frutas.length = 2;
 
 console.log(frutas) // ["manzana", "pera"]
 console.log(frutas.length) // 2
-
 
 // Metodos de arrays:
 
@@ -403,7 +415,7 @@ const numbers = [1, 2, 3, 4, 5, 6, 7]
 const doubleEvenNumbers2 = numbers.reduce((acumualdor, number) => {
   const doubled = number * 2
   const isEven = doubled % 2 === 0
-  const isGreaterThanFive = doubled> 5;
+  const isGreaterThanFive = doubled > 5;
 
   // si es par y mayor que 5 lo añadimos al array
   if (isEven && isGreaterThanFive) {
