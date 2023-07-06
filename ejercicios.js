@@ -232,7 +232,7 @@ const convertDegrees = (grados = undefined, unidad = undefined) => {
   
   if(unidad === undefined) return console.warn("No ingresaste el tipo de grados a convertir")
   
-    if(typeof unidad !== "string") return console.error(`El valor ${unidad} ingresado, no es una cadena`)
+  if(typeof unidad !== "string") return console.error(`El valor ${unidad} ingresado, no es una cadena`)
   
   if(unidad.length !== 1 || !/(C|F)/.test(unidad)) return console.warn("Valor de unidad no reconocido")
   
@@ -254,3 +254,69 @@ convertDegrees(100, "F");
 17) Programa una función que dada una fecha válida determine cuantos años han pasado hasta el día de hoy, pe. miFuncion(new Date(1984,4,23)) devolverá 35 años (en 2020).
 */
 
+
+// 15) :
+const convertBinaryDecimal = (number = undefined, base = undefined) => {
+  if (number === undefined) return console.warn("No ingresaste un numero")
+  
+  if (typeof number !== "number") return console.error(`El valor ${number} ingresado no es un numero`)
+
+  if (base === undefined) return console.warn("No ingresaste la base a convertir")
+
+  if (typeof base !== "number") return console.error(`El valor ${base} ingresado no es un numero`)
+
+  if (base === 2) {
+    return console.log(`${number} base ${base} = ${parseInt(number,base)} base 10`)
+  } else if (base === 10) {
+    return console.log(`${number} base ${base} = ${number.toString(base)} base 2`)
+  } else {
+    console.error("El tipo de base a convertir no es valido")
+  }
+}
+
+convertBinaryDecimal(100, 2);
+
+
+// 16) : 
+const mountDiscount = (price = undefined, discount = 0) => {
+  if (price === undefined) return console.warn("No ingresaste un numero")
+  
+  if (typeof price !== "number") return console.error(`El valor ${price} ingresado no es un numero`)
+
+  if (price <= 0) return console.warn("El monto no puede ser 0 ni negativo")
+  
+  if (discount <= 0) return console.warn("El descuento no puede ser 0 ni negativo")
+
+  if (typeof discount !== "number") return console.error(`El valor ${discount} ingresado no es un numero`)
+  
+  return console.log(`${price} - ${discount} = ${price - (price * discount) / 100}`)
+}
+
+mountDiscount(1000, 20)
+
+
+// 17) : 
+const calculateYears = (date = undefined) => {
+  if(date === undefined) return console.warn("No ingresaste la fecha")
+  
+  if (!(date instanceof Date)) return console.error(`El valor ingresado no es una fecha`)
+  
+  let todayLeftDate = new Date().getTime() - date.getTime(),
+      yearsInMS = 1000 * 60 * 60 * 24 * 365
+      humansYears = Math.floor(todayLeftDate / yearsInMS);
+  
+  return (Math.sign(humansYears === -1))
+    ? console.log(`Faltan ${Math.abs(humansYears)} años para el ${date.getFullYear()}`)
+    : (Math.sign(humansYears) === 1)
+      ? console.log(`Han pasado ${humansYears} años desde ${date.getFullYear()}`)
+      : console.log(`Estamos en el año actual ${date.getFullYear()}`)
+}
+
+calculateYears(new Date(1984, 4, 23));
+
+
+/*
+18) Programa una función que dada una cadena de texto cuente el número de vocales y consonantes, pe. miFuncion("Hola Mundo") devuelva Vocales: 4, Consonantes: 5.
+19) Programa una función que valide que un texto sea un nombre válido, pe. miFuncion("Jonathan MirCha") devolverá verdadero.
+20) Programa una función que valide que un texto sea un email válido, pe. miFuncion("jonmircha@gmail.com") devolverá verdadero.
+*/
