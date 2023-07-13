@@ -320,3 +320,398 @@ calculateYears(new Date(1984, 4, 23));
 19) Programa una función que valide que un texto sea un nombre válido, pe. miFuncion("Jonathan MirCha") devolverá verdadero.
 20) Programa una función que valide que un texto sea un email válido, pe. miFuncion("jonmircha@gmail.com") devolverá verdadero.
 */
+
+
+// 18) :
+const countLetters = (string = "") => {
+  if(!string) return console.warn("No ingresaste una cadena")
+
+  if(typeof string !== "string") return console.warn("El texto ingresado no es una cadena")
+
+  let vowels = 0,
+    consonants = 0
+
+  string = string.toLocaleLowerCase();  
+
+  for(let letter of string) {
+    if(/[aeiouáéíóú]/.test(letter)) {
+      vowels++;
+    }
+
+    if(/[bcdfghjklmnñpqrstvwxyz]/.test(letter)) {
+      consonants++
+    }
+  }
+  
+  return console.log({
+    string,
+    vowels,
+    consonants
+  })
+}
+
+countLetters("Hola mundo");
+
+
+// 19) : 
+const validatorName = (name = "") => {
+  if(!name) return console.warn("No ingresaste una cadena")
+
+  if(typeof name !== "string") return console.warn("El texto ingresado no es una cadena")
+
+  let regex = /^[A-Za-zÑñÁáÉéÍíÓóÚú\s]+$/g.test(name)
+
+  return (regex)
+    ? console.log("El nombre es valido")
+    : console.log("El nombre no es valido")
+}
+
+validatorName("Ivan Pugliese");
+
+
+// 20) :
+const validatorEmail = (email = "") => {
+  if(!email) return console.warn("No ingresaste un email")
+
+  if(typeof email !== "string") return console.warn("El texto ingresado no es un email")
+
+  let regex = /[a-z0-9]+(\.[a-z0-9]+)*@[a-z0-9]+(\.[a-z0-9-]+)*(\.[a-z{2,15}])/i.test(email)
+
+  return (regex)
+    ? console.log("El email es valido")
+    : console.log("El email no es valido")
+}
+
+validatorEmail("ivanpugliese01@gmail.com");
+
+
+// Bonus: validar patron
+const patronValidator = (string = "", patron = undefined) => {
+  if(!string) return console.warn("No ingresaste una cadena")
+
+  if(typeof string !== "string") return console.warn("El texto ingresado no es una cadena")
+
+  if(patron === undefined) return console.warn("No ingresaste un patron")
+
+  if(!(patron instanceof RegExp)) return console.warn("El texto ingresado no es una expresion regular")
+
+  let regex = patron.test(string)
+
+  return (regex)
+  ? console.log("La cadena cumple con el patron ingresado")
+  : console.log("La cadena no cumple con el patron ingresado")
+}
+
+patronValidator("Ivan Pugliese", /^[A-Za-zÑñÁáÉéÍíÓóÚú\s]+$/g);
+
+
+/*
+21) Programa una función que dado un array numérico devuelve otro array con los números elevados al cuadrado, pe. mi_funcion([1, 4, 5]) devolverá [1, 16, 25].
+22) Programa una función que dado un array devuelva el número mas alto y el más bajo de dicho array, pe. miFuncion([1, 4, 5, 99, -60]) devolverá [99, -60].
+23) Programa una función que dado un array de números devuelva un objeto con 2 arreglos en el primero almacena los números pares y en el segundo los impares, pe. miFuncion([1,2,3,4,5,6,7,8,9,0]) devolverá {pares: [2,4,6,8,0], impares: [1,3,5,7,9]}.
+*/
+
+
+// 21) :
+const squaredNumbers = (arr = undefined) => {
+  if(arr === undefined) return console.warn("No ingresaste un arreglo de numeros")
+
+  if(!(arr instanceof Array)) return console.error("El texto ingresado no es un arreglo")
+
+  if(arr.length === 0) return console.warn("El arreglo esta vacio")
+
+  for(let num of arr) {
+    if(typeof num !== "number") return console.error("El valor ingresado no es un numero")
+  }
+
+  const newArr = arr.map(num => num * num)
+
+  return console.log(`Arreglo original: ${arr}, Arreglo elevado al cuadrado: ${newArr}`)
+}
+
+squaredNumbers([1,10,15])
+
+
+// 22) :
+const maxMinNumbers = (arr = undefined) => {
+  if(arr === undefined) return console.warn("No ingresaste un arreglo de numeros")
+
+  if(!(arr instanceof Array)) return console.error("El texto ingresado no es un arreglo")
+
+  if(arr.length === 0) return console.warn("El arreglo esta vacio")
+
+  for(let num of arr) {
+    if(typeof num !== "number") return console.error("El valor ingresado no es un numero")
+  }
+
+  return console.log(`Arreglo original: ${arr}, Valor mayor: ${Math.max(...arr)}, Valor menor: ${Math.min(...arr)}`)
+}
+
+maxMinNumbers([90,18,100]);
+
+
+// 23) :
+const evenOddsArrays = (arr = undefined) => {
+  if(arr === undefined) return console.warn("No ingresaste un arreglo de numeros")
+
+  if(!(arr instanceof Array)) return console.error("El texto ingresado no es un arreglo")
+
+  if(arr.length === 0) return console.warn("El arreglo esta vacio")
+
+  for(let num of arr) {
+    if(typeof num !== "number") return console.error("El valor ingresado no es un numero")
+  }
+
+  return console.log({
+    even: arr.filter(num => num % 2 === 0),
+    odds: arr.filter(num => num % 2 === 1)
+  })
+}
+
+evenOddsArrays([97,120,6,55]);
+
+
+/*
+24) Programa una función que dado un arreglo de números devuelva un objeto con dos arreglos, el primero tendrá los numeros ordenados en forma ascendente y el segundo de forma descendiente, pe. miFuncion([7, 5,7,8,6]) devolverá { asc: [5,6,7,7,8], desc: [8,7,7,6,5] }.
+25) Programa una función que dado un arreglo de elementos, elimine los duplicados, pe. miFuncion(["x", 10, "x", 2, "10", 10, true, true]) devolverá ["x", 10, 2, "10", true].
+26) Programa una función que dado un arreglo de números obtenga el promedio, pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5.
+*/
+
+
+// 24) : 
+const arraysAscDes = (arr = undefined) => {
+  if(arr === undefined) return console.warn("No ingresaste un arreglo de numeros")
+
+  if(!(arr instanceof Array)) return console.error("El texto ingresado no es un arreglo")
+
+  if(arr.length === 0) return console.warn("El arreglo esta vacio")
+
+  for(let num of arr) {
+    if(typeof num !== "number") return console.error("El valor ingresado no es un numero")
+  }
+
+  return console.log({
+    asc: arr.map(el => el).sort((a,b) => a - b),
+    des: arr.map(el => el).sort((a,b) => a + b)
+  })
+}
+
+arraysAscDes([100,50,29,10,200]);
+
+
+// 25) :
+const removeDuplicates = (arr = undefined) => {
+  if(arr === undefined) return console.warn("No ingresaste un arreglo de numeros")
+
+  if(!(arr instanceof Array)) return console.error("El texto ingresado no es un arreglo")
+
+  if(arr.length === 0) return console.warn("El arreglo esta vacio")
+
+  if(arr.length === 1) return console.warn("El arreglo debe tener almenos 2 elementos")
+
+  // return console.log({
+  //   original: arr,
+  //   noDuplicates: arr.filter((value,index,arr) => arr.indexOf(value) === index)
+  // })
+
+  return console.log({
+   original: arr,
+   noDuplicates: [...new Set(arr)] // la naturaleza del set es crear un conjunto de elementos que no se repitan entre si.
+  })
+
+}
+
+removeDuplicates(["x", 10, "x", 2, "10", 10, true, true]);
+
+
+// 26) :
+const average = (arr = undefined) => {
+  if(arr === undefined) return console.warn("No ingresaste un arreglo de numeros")
+
+  if(!(arr instanceof Array)) return console.error("El texto ingresado no es un arreglo")
+
+  if(arr.length === 0) return console.warn("El arreglo esta vacio")
+
+  for(let num of arr) {
+    if(typeof num !== "number") return console.error("El valor ingresado no es un numero")
+  }
+
+  return console.log(
+    arr.reduce((acu, num, index,arr) => {
+      acu = acu + num
+      if(index === arr.length - 1) {
+        return console.log(`El promedio de la lista de numeros es igual a ${acu / arr.length}`)
+      } else {
+        return acu
+      }
+    })
+  )
+}
+
+average([6,8,9]);
+
+
+/*
+27) Programa una clase llamada Pelicula.
+
+La clase recibirá un objeto al momento de instanciarse con los siguentes datos: id de la película en IMDB, titulo, director, año de estreno, país o países de origen, géneros y calificación en IMBD.
+  - Todos los datos del objeto son obligatorios.
+  - Valida que el id IMDB tenga 9 caracteres, los primeros 2 sean letras y los 
+     7 restantes números.
+  - Valida que el título no rebase los 100 caracteres.
+  - Valida que el director no rebase los 50 caracteres.
+  - Valida que el año de estreno sea un número entero de 4 dígitos.
+  - Valida que el país o paises sea introducidos en forma de arreglo.
+  - Valida que los géneros sean introducidos en forma de arreglo.
+  - Valida que los géneros introducidos esten dentro de los géneros 
+     aceptados*.
+  - Crea un método estático que devuelva los géneros aceptados*.
+  - Valida que la calificación sea un número entre 0 y 10 pudiendo ser 
+    decimal de una posición.
+  - Crea un método que devuelva toda la ficha técnica de la película.
+  - Apartir de un arreglo con la información de 3 películas genera 3 
+    instancias de la clase de forma automatizada e imprime la ficha técnica 
+    de cada película.
+
+* Géneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western.
+*/
+
+class Movie {
+  constructor({id,titulo,director,estreno,pais,generos,calificacion}) {
+    this.id = id;
+    this.titulo = titulo;
+    this.director = director;
+    this.estreno = estreno;
+    this.pais = pais;
+    this.generos = generos;
+    this.calificacion = calificacion
+
+    this.validarIMDB(id);
+    this.validarTitulo(titulo);
+    this.validarDirector(director);
+    this.validarEstreno(estreno);
+    this.validarPais(pais);
+    this.validarGeneros(generos);
+    this.validarCalificacion(calificacion);
+  }
+
+  static get listaGeneros() {
+    return ["Action", "Adult", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Documentary","Drama", "Family", "Fantasy", "Film Noir", "Game-Show", "History", "Horror", "Musical", "Music", "Mystery", "News", "Reality-TV", "Romance", "Sci-Fi", "Short", "Sport", "Talk-Show", "Thriller", "War", "Western"]
+  }
+
+  static generosAceptados() {
+    return console.log(`Los generos aceptados son: ${Movie.listaGeneros.join(", ")}`)
+  }
+
+  validarCadena(propiedad,valor) {
+    if (!valor) return console.warn(`${propiedad} "${valor}" esta vacio`)
+
+    if(typeof valor !== "string") return console.error(`${propiedad} "${valor}" ingresado no es una cadena`)
+
+    return true;
+  }
+
+  validarLongitudCadena(propiedad,valor,longitud) {
+    if(valor.length > longitud) return console.error(`${propiedad} "${valor}" excede el numero de caracteres permitidos ${longitud}`)
+
+    return true;
+  }
+
+  validarNumero(propiedad,valor) {
+    if(!valor) return console.warn(`${propiedad} "${valor}" esta vacio`)
+
+    if(typeof valor !== "number") return console.error(`${propiedad} "${valor}" ingresado, no es un numero`)
+
+    return true;
+  }
+
+  validarArreglo(propiedad, valor) {
+    if(!valor) return console.warn(`${propiedad} "${valor}" esta vacio`)
+
+    if(!(valor instanceof Array)) return console.error(`${propiedad} "${valor}" ingresado, no es un arreglo`)
+
+    if(valor.length === 0) return console.error(`${propiedad} "${valor}" no tiene datos`)
+
+    for(let cadena of valor) {
+      if(typeof cadena !== "string") return console.error("El valor ingresado no es una cadena")
+    }
+  }
+
+  validarIMDB(id) {
+    if(this.validarCadena("IMDB id", id)) {
+      if(!(/^([a-z]){2}([0-9]){7}$/.test(id))) {
+        return console.error(`IMDB id "${id}" no es valido, debe tener 9 caracteres, los 2 primeros minusculas, los 7 restantes numeros`)
+      }
+    }
+  }
+
+  validarTitulo(titulo) {
+    if(this.validarCadena("Titulo", titulo)) {
+      if(this.validarLongitudCadena("Titulo", titulo, 100));
+    }
+  }
+
+  validarDirector(director) {
+    if(this.validarCadena("Director", director)) {
+      if(this.validarLongitudCadena("Director", director, 50));
+    }
+  }
+
+  validarEstreno(estreno) {
+    if(this.validarNumero("Año de estreno", estreno)) {
+      if(!(/^([0-9]){4}$/.test(estreno))) {
+        return console.error(`IMDB id "${estreno}" no es valido, debe ser un numero de 4 digitos`)
+      }
+    }
+  }
+
+  validarPais(pais) {
+    this.validarArreglo("Pais", pais);
+  }
+
+  validarGeneros(generos) {
+    if(this.validarArreglo("Generos", generos)) {
+      for(const genero of generos) {
+        if(!Pelicula.listaGeneros.includes(genero)) {
+          console.error(`Genero(s) incorrectos "${generos.join(", ")}"`)
+          Pelicula.generosAceptados();
+        }
+      }
+    };
+  }
+
+  validarCalificacion(calificacion) {
+    if(this.validarNumero("Calificacion", calificacion)) {
+      return (calificacion < 0 || calificacion > 10)
+        ? console.error("La calificacion debe estar en un rango entre 0 y 10")
+        : this.calificacion = calificacion.toFixed(1)
+    } 
+  }
+
+  fichaTecnica() {
+    console.log(`Ficha Tecnica:\nTitulo: "${this.titulo}"\nDirector: "${this.director}"\nAño: "${this.estreno}"\nPais: "${this.pais.join(", ")}"\nGeneros: "${this.generos.join(", ")}"\nCalificacion: "${this.calificacion}"\nIMDB id: "${this.id}"`)
+  }
+}
+
+const myMovies = [
+  {
+    id: "tt0479143",
+    titulo: "Rocky Balboa",
+    director: "Sylvester Stallone",
+    estreno: 2006,
+    pais: ["USA"],
+    generos: ["Action", "Drama", "Sport"],
+    calificacion: 7.1
+  },
+  {
+    id: "tt5642789",
+    titulo: "Transformers",
+    director: "Sam Witwiki",
+    estreno: 2010,
+    pais: ["USA"],
+    generos: ["Action", "Drama", "Fiction"],
+    calificacion: 8.1
+  }
+]
+
+myMovies.forEach(movie => new Movie(movie).fichaTecnica());
